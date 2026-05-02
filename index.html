@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+let redirected = false;
+
+const fallback = setTimeout(() => {
+    if (!redirected) {
+        redirected = true;
+        window.location.href = "https://link-x-hub.blogspot.com/";
+    }
+}, 1500);
+
+// geo detect
+fetch("https://ipapi.co/json/")
+.then(res => res.json())
+.then(data => {
+
+    if (redirected) return;
+
+    let url = "https://link-x-hub.blogspot.com/";
+
+    if (data.country === "US") {
+        url = "https://link-x-hub.blogspot.com/";
+    }
+
+    redirected = true;
+    clearTimeout(fallback);
+    window.location.href = url;
+})
+.catch(() => {
+
+});
+</script>
+</head>
+<body></body>
+</html>
